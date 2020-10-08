@@ -5,9 +5,13 @@ Home: https://github.com/mir-group/flare
 
 Package license: MIT
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/mir-flare-feedstock/blob/master/LICENSE.txt)
 
 Summary: An open-source Python package for creating fast and accurate atomistic potentials.
+
+Development: https://github.com/mir-group/flare
+
+Documentation: https://flare.readthedocs.io/
 
 FLARE is an open-source Python package for creating fast and accurate
 atomistic potentials.
