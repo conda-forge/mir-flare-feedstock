@@ -25,8 +25,8 @@ requirements:
     - nbsphinx
     - nptyping
     - numba
-    - numpy >=1.16.0
-    - pymatgen
+    - numpy <=1.20.0
+    - pymatgen <2021
     - pytest >=4.6
     - python >=3.6
     - scipy
