@@ -1,5 +1,5 @@
 {% set name = "mir-flare" %}
-{% set version = "0.1.6" %}
+{% set version = "0.1.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 12aa05fb9295ecb9e06720a8de4dbf3dc4dabc71f2f8bac39fa33ab4935d5bee
+  sha256: dab83d0d92abba43cf153854f8a52de5d73ba442e50d8a48323ffeb41485b965
 
 build:
   number: 0
