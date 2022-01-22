@@ -30,6 +30,7 @@ requirements:
     - pytest >=4.6
     - python >=3.6
     - scipy
+    - pytest-mock
 
 test:
   imports:
