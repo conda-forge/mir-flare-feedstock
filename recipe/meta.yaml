@@ -1,5 +1,5 @@
 {% set name = "mir-flare" %}
-{% set version = "0.1.8" %}
+{% set version = "0.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: eccabac4ac6cfadfb4e4517b8de5eaf65e1f119c7d82f8f5e51293d5f2a1d76c
+  sha256: f15273d9ef85d05be9c558b316ba58536ba8fe3968c21e8a5a610573a35eece3
 
 build:
   number: 0
@@ -30,6 +30,7 @@ requirements:
     - pytest >=4.6
     - python >=3.6
     - scipy
+    - pytest-mock
 
 test:
   imports:
