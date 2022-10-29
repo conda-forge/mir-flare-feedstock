@@ -23,7 +23,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - pip
-    - python >=3.6
+    - python
     - mkl-devel
     - mkl-service
     - mkl_fft
@@ -33,7 +33,7 @@ requirements:
     - ase
     - numba
     - numpy
-    - python >=3.6
+    - python
     - pyyaml
     - scipy
 
