@@ -1,41 +1,46 @@
 {% set name = "mir-flare" %}
-{% set version = "0.2.4" %}
+{% set version = "1.3.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 7f4dbd85b0c923855344ead095a372817845ea655c41f354813faed3aad2a725
+  git_url: https://github.com/mir-group/flare.git
+  git_tag: {{ version }}
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+  entry_points:
+    - flare-otf = flare.scripts.otf_train:main
 
 requirements:
+  build:
+    - cmake
+    - make
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
     - pip
     - python >=3.6
+    - mkl-devel
+    - mkl-service
+    - mkl_fft
+    - openmp
+    - setuptools
   run:
     - ase
-    - ipython
-    - memory_profiler
-    - nbsphinx
-    - nptyping
     - numba
-    - numpy <=1.20.0
-    - pymatgen <2021
-    - pytest >=4.6
+    - numpy
     - python >=3.6
+    - pyyaml
     - scipy
-    - pytest-mock
 
 test:
   imports:
     - flare
-    - flare.ase
+    - flare.bffs.sgp
   commands:
     - pip check
   requires:
@@ -51,7 +56,7 @@ about:
   description: |
     FLARE is an open-source Python package for creating fast and accurate 
     atomistic potentials.
-  doc_url: https://flare.readthedocs.io/
+  doc_url: https://mir-group.github.io/flare/
   dev_url: https://github.com/mir-group/flare
 
 extra:
