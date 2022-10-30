@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/mir-group/flare/archive/refs/tags/{{ version }}.tar.gz
   sha256: e377ec63200e3099af5fd1607bbbd22abe855db0fd13d565f6278289da785985
+  patches: 
+    - requirements.patch
 
 build:
   number: 0
@@ -28,24 +30,14 @@ requirements:
     - eigen
   run:
     - ase
-    - cmake
     - ipython
-    - memory_profiler
-    - jupyter
-    - nbconvert
     - pyyaml
-    - docutils =0.17.1
-    - alabaster =0.7.12
     - babel
     - pygments =2.11.2
-    - nbsphinx
-    - nptyping
     - numba
     - numpy <=1.20.3
-    - pytest >=4.6
     - python
     - scipy
-    - pytest-mock
 
 test:
   imports:
