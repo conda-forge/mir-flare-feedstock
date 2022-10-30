@@ -26,6 +26,7 @@ requirements:
   host:
     - pip
     - python
+    - libcblas
     - liblapacke
     - eigen
   run:
