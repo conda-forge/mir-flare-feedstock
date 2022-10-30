@@ -8,7 +8,7 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '14'
-liblapack:
+liblapacke:
 - 3.9 *netlib
 llvm_openmp:
 - '14'
