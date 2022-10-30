@@ -16,7 +16,6 @@ build:
 
 requirements:
   build:
-    - cmake
     - make
     - {{ compiler('cxx') }}
     - llvm-openmp  # [osx]
@@ -24,9 +23,7 @@ requirements:
   host:
     - pip
     - python
-    - libblas
-    - libcblas
-    - liblapack
+    - cmake
     - liblapacke
     - eigen
   run:
