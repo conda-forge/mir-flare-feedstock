@@ -24,11 +24,13 @@ requirements:
     - {{ compiler('cxx') }}
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
+    - pybind11
   host:
     - pip
     - python
     - liblapacke
     - eigen
+    - pybind11
   run:
     - ase
     - ipython
