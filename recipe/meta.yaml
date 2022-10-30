@@ -15,6 +15,9 @@ build:
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
+  build:
+    - cmake
+    - make
   host:
     - pip
     - python >=3.6
