@@ -80,7 +80,7 @@ index 6410c956..5f527d42 100644
 +# )
 +# ExternalProject_Get_Property(eigen_project SOURCE_DIR)
 +# add_library(Eigen3 INTERFACE)
-+find_package(Eigen3 INTERFACE)
++find_package(Eigen3)
  target_include_directories(Eigen3 SYSTEM INTERFACE ${SOURCE_DIR})
  include_directories(${SOURCE_DIR})
  
@@ -110,7 +110,7 @@ index 6410c956..5f527d42 100644
  find_package(PythonLibsNew ${FLARE_PYTHON_VERSION} REQUIRED)
  
 -add_library(pybind11 INTERFACE)
-+find_package(pybind11 INTERFACE)
++find_package(pybind11)
 +# add_library(pybind11 INTERFACE)
  ExternalProject_Get_Property(pybind11_project SOURCE_DIR)
  target_include_directories(pybind11 SYSTEM INTERFACE ${SOURCE_DIR}/include)
