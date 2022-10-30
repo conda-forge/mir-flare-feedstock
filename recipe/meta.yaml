@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/mir-group/flare/archive/refs/tags/{{ version }}.tar.gz
-  sha256: e377ec63200e3099af5fd1607bbbd22abe855db0fd13d565f6278289da785985
+  sha256: ddc29d58290cdc740524d37ebf1fb548841e044d2aa6105dca96eb23c0d57a66
   patches: 
     - requirements.patch
 
