@@ -1,12 +1,12 @@
 {% set name = "mir-flare" %}
-{% set version = "0.2.4" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://github.com/mir-group/flare/archive/v{{ version }}.tar.gz
   sha256: 7f4dbd85b0c923855344ead095a372817845ea655c41f354813faed3aad2a725
 
 build:
