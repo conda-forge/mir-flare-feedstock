@@ -19,7 +19,7 @@ requirements:
     - make
   host:
     - pip
-    - python >=3.6
+    - python
   run:
     - ase
     - ipython
@@ -30,7 +30,7 @@ requirements:
     - numpy <=1.20.0
     - pymatgen <2021
     - pytest >=4.6
-    - python >=3.6
+    - python
     - scipy
     - pytest-mock
 
