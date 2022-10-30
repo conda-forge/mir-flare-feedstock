@@ -4,14 +4,14 @@ Date: Sun, 30 Oct 2022 12:56:25 -0600
 Subject: [PATCH] Update requirements.txt
 
 ---
- requirements.txt | 14 --------------
- 1 file changed, 14 deletions(-)
+ requirements.txt | 15 ---------------
+ 1 file changed, 15 deletions(-)
 
 diff --git a/requirements.txt b/requirements.txt
 index f2c1fd1e..31bcc5e9 100644
 --- a/requirements.txt
 +++ b/requirements.txt
-@@ -1,20 +1,6 @@
+@@ -1,20 +1,5 @@
  numpy >=1.18, <=1.20.3
  scipy
 -memory_profiler
@@ -24,7 +24,7 @@ index f2c1fd1e..31bcc5e9 100644
 -jupyter
 -nbconvert
  pyyaml
- wandb
+-wandb
 -# some dependencies of sphinx and notebook
 -docutils==0.17.1
 -alabaster==0.7.12
