@@ -23,11 +23,11 @@ requirements:
   host:
     - pip
     - python
-    - cmake
     - liblapacke
     - eigen
   run:
     - ase
+    - cmake
     - ipython
     - memory_profiler
     - jupyter
