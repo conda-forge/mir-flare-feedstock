@@ -29,6 +29,7 @@ requirements:
     - python
     - liblapacke
     - eigen
+    - wandb
   run:
     - ase
     - ipython
