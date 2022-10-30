@@ -12,6 +12,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
+  skip: true  # [py>3.9]
 
 requirements:
   build:
@@ -24,6 +25,7 @@ requirements:
     - pip
     - python
     - liblapack
+    - eigen
   run:
     - ase
     - ipython
@@ -47,7 +49,6 @@ requirements:
 test:
   imports:
     - flare
-    - flare.ase
   commands:
     - pip check
   requires:
