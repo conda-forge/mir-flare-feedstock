@@ -10,6 +10,7 @@ source:
   sha256: ddc29d58290cdc740524d37ebf1fb548841e044d2aa6105dca96eb23c0d57a66
   patches: 
     - requirements.patch
+    - cmake.patch
 
 build:
   number: 0
@@ -22,13 +23,13 @@ requirements:
     - make
     - cmake
     - {{ compiler('cxx') }}
-    - llvm-openmp  # [osx]
-    - libgomp      # [linux]
   host:
     - pip
     - python
-    - liblapacke
     - eigen
+    - libblas
+    - pybind11
+    - nlohmann_json
   run:
     - ase
     - ipython
