@@ -27,6 +27,7 @@ requirements:
     - pip
     - python
     - eigen
+    - lapacke
     - pybind11
     - nlohmann_json
   run:
