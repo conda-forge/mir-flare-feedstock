@@ -4,14 +4,14 @@ Date: Mon, 31 Oct 2022 14:18:49 -0600
 Subject: [PATCH] Update CMakeLists.txt
 
 ---
- CMakeLists.txt | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ CMakeLists.txt | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 595bd44e..4970413a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -31,10 +31,10 @@ endif()
+@@ -31,10 +31,11 @@ endif()
  include(FetchContent)
  
  # Add conda include directories
@@ -21,6 +21,7 @@ index 595bd44e..4970413a 100644
 -    include_directories($ENV{CONDA_PREFIX}/include)
 -    link_directories($ENV{CONDA_PREFIX}/lib)
 +    include_directories($ENV{PREFIX}/include)
++    include_directories($ENV{PREFIX}/include/eigen3)
 +    link_directories($ENV{PREFIX}/lib)
  endif()
  
