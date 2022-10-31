@@ -1,0 +1,54 @@
+From 51d26f38a984b57c320fa9a30eb85a4c3e15d8ce Mon Sep 17 00:00:00 2001
+From: Jan Janssen <jan-janssen@users.noreply.github.com>
+Date: Mon, 31 Oct 2022 14:18:49 -0600
+Subject: [PATCH] Update CMakeLists.txt
+
+---
+ CMakeLists.txt | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 595bd44e..4970413a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -31,10 +31,10 @@ endif()
+ include(FetchContent)
+ 
+ # Add conda include directories
+-if (DEFINED ENV{CONDA_PREFIX})
++if (DEFINED ENV{PREFIX})
+     message(STATUS "Adding conda include directories.")
+-    include_directories($ENV{CONDA_PREFIX}/include)
+-    link_directories($ENV{CONDA_PREFIX}/lib)
++    include_directories($ENV{PREFIX}/include)
++    link_directories($ENV{PREFIX}/lib)
+ endif()
+ 
+ # googletest: only used in test mode
+@@ -52,7 +52,7 @@ endif()
+ 
+ # Json
+ ################################################################################
+-if(EXISTS $ENV{CONDA_PREFIX}/include/nlohmann)
++if(EXISTS $ENV{PREFIX}/include/nlohmann)
+     find_package(nlohmann_json)
+ else()
+     message(STATUS "Download nlohmann_json.")
+@@ -84,7 +84,7 @@ endif()
+ # Eigen3
+ ################################################################################
+ set(EXIST_EIGEN OFF)
+-if(EXISTS $ENV{CONDA_PREFIX}/include/eigen3)
++if(EXISTS $ENV{PREFIX}/include/eigen3)
+     find_package(Eigen3 3.3)
+     message(STATUS "Found Eigen3.")
+     set(EXIST_EIGEN ON)
+@@ -114,7 +114,7 @@ endif()
+ find_package(PythonLibsNew ${FLARE_PYTHON_VERSION} REQUIRED)
+ 
+ set(EXIST_PYBIND OFF)
+-if(EXISTS $ENV{CONDA_PREFIX}/include/pybind11)
++if(EXISTS $ENV{PREFIX}/include/pybind11)
+     find_package(pybind11 CONFIG)
+     set(EXIST_PYBIND ON)
+ else()
