@@ -1,41 +1,49 @@
 {% set name = "mir-flare" %}
-{% set version = "0.2.4" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 7f4dbd85b0c923855344ead095a372817845ea655c41f354813faed3aad2a725
+  url: https://github.com/mir-group/flare/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 213c3e1fc7540328c3ce2c3659d19f510edd18939f7d1401a50965637124901b
+  patches: 
+    - requirements.patch
+    - cmake.patch
 
 build:
   number: 0
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv
+  skip: true  # [py>39]
+  skip: true  # [win]
 
 requirements:
+  build:
+    - make
+    - cmake
+    - {{ compiler('cxx') }}
   host:
     - pip
-    - python >=3.6
+    - python
+    - eigen
+    - libblas
+    - pybind11
+    - nlohmann_json
   run:
     - ase
     - ipython
-    - memory_profiler
-    - nbsphinx
-    - nptyping
+    - pyyaml
+    - babel
+    - pygments =2.11.2
     - numba
-    - numpy <=1.20.0
-    - pymatgen <2021
-    - pytest >=4.6
-    - python >=3.6
+    - numpy <=1.20.3
+    - python
     - scipy
-    - pytest-mock
 
 test:
   imports:
     - flare
-    - flare.ase
   commands:
     - pip check
   requires:
