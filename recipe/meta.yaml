@@ -29,6 +29,7 @@ requirements:
     - python
     - liblapacke
     - eigen
+    - pybind11
   run:
     - ase
     - ipython
