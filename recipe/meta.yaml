@@ -23,12 +23,9 @@ requirements:
     - make
     - cmake
     - {{ compiler('cxx') }}
-    - llvm-openmp  # [osx]
-    - libgomp      # [linux]
   host:
     - pip
     - python
-    - liblapacke
     - eigen
     - pybind11
     - nlohmann_json
