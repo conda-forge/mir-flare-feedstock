@@ -45,6 +45,7 @@ requirements:
 test:
   imports:
     - flare
+    - flare.bffs.sgp._C_flare
   commands:
     - pip check
   requires:
