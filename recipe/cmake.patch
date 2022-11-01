@@ -42,10 +42,10 @@ index 6410c956..5ad799f3 100644
 -# googletest
 -################################################################################
 +# Add conda include directories
-+if (DEFINED ENV{CONDA_PREFIX})
++if (DEFINED ENV{PREFIX})
 +    message(STATUS "Adding conda include directories.")
-+    include_directories($ENV{CONDA_PREFIX}/include)
-+    link_directories($ENV{CONDA_PREFIX}/lib)
++    include_directories($ENV{PREFIX}/include)
++    link_directories($ENV{PREFIX}/lib)
 +endif()
  
 -FetchContent_Declare(googletest
@@ -80,7 +80,7 @@ index 6410c956..5ad799f3 100644
 -FetchContent_Populate(json)
 -add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR})
 -include_directories(${json_SOURCE_DIR})
-+if(EXISTS $ENV{CONDA_PREFIX}/include/nlohmann)
++if(EXISTS $ENV{PREFIX}/include/nlohmann)
 +    find_package(nlohmann_json)
 +else()
 +    message(STATUS "Download nlohmann_json.")
@@ -116,7 +116,7 @@ index 6410c956..5ad799f3 100644
 -target_include_directories(Eigen3 SYSTEM INTERFACE ${SOURCE_DIR})
 -include_directories(${SOURCE_DIR})
 +set(EXIST_EIGEN OFF)
-+if(EXISTS $ENV{CONDA_PREFIX}/include/eigen3)
++if(EXISTS $ENV{PREFIX}/include/eigen3)
 +    find_package(Eigen3 3.3)
 +    message(STATUS "Found Eigen3.")
 +    set(EXIST_EIGEN ON)
@@ -164,7 +164,7 @@ index 6410c956..5ad799f3 100644
 -      TARGET_LINK_LIBRARIES(pybind11 INTERFACE "-undefined dynamic_lookup")
 -      message(STATUS "Building in conda environment on MAC")
 +set(EXIST_PYBIND OFF)
-+if(EXISTS $ENV{CONDA_PREFIX}/include/pybind11)
++if(EXISTS $ENV{PREFIX}/include/pybind11)
 +    find_package(pybind11 CONFIG)
 +    set(EXIST_PYBIND ON)
  else()
