@@ -13,10 +13,11 @@ source:
     - cmake.patch
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py>39]
   skip: true  # [win]
+  skip: true  # [osx]
 
 requirements:
   build:
