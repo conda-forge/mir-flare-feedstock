@@ -23,6 +23,8 @@ requirements:
     - make
     - cmake
     - {{ compiler('cxx') }}
+    - llvm-openmp  # [osx]
+    - libgomp      # [linux]
   host:
     - pip
     - python
