@@ -23,13 +23,12 @@ requirements:
     - make
     - cmake
     - {{ compiler('cxx') }}
-    - llvm-openmp  # [osx]
-    - libgomp      # [linux]
   host:
     - pip
     - python
     - eigen
-    - liblapack
+    - mkl
+    - mkl-include
     - pybind11
     - nlohmann_json
     - wandb
