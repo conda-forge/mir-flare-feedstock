@@ -1,17 +1,17 @@
-From 576137518e209fec2f35eb718b7712630cb4e893 Mon Sep 17 00:00:00 2001
+From 4d08d7412ecabc0bb91a4681c4df78be6967f6a7 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Sun, 30 Oct 2022 11:27:48 -0600
+Date: Sun, 30 Oct 2022 12:56:25 -0600
 Subject: [PATCH] Update requirements.txt
 
 ---
- requirements.txt | 14 --------------
- 1 file changed, 14 deletions(-)
+ requirements.txt | 15 ---------------
+ 1 file changed, 15 deletions(-)
 
 diff --git a/requirements.txt b/requirements.txt
-index 5e40d496..9d6d259d 100644
+index f2c1fd1e..31bcc5e9 100644
 --- a/requirements.txt
 +++ b/requirements.txt
-@@ -1,19 +1,5 @@
+@@ -1,20 +1,5 @@
  numpy >=1.18, <=1.20.3
  scipy
 -memory_profiler
@@ -24,6 +24,7 @@ index 5e40d496..9d6d259d 100644
 -jupyter
 -nbconvert
  pyyaml
+-wandb
 -# some dependencies of sphinx and notebook
 -docutils==0.17.1
 -alabaster==0.7.12
