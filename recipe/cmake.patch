@@ -1,17 +1,17 @@
-From ffc2e7e8519ccca4cd4cfab018bc3526682a61f6 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Jan=20Jan=C3=9Fen?= <janssen@mpie.de>
-Date: Mon, 31 Oct 2022 17:49:31 -0600
-Subject: [PATCH] cmakepatch
+From 290ee7110acc4927964b9a43ce493c847866c284 Mon Sep 17 00:00:00 2001
+From: YuuuXie <xieyu.fish@gmail.com>
+Date: Tue, 1 Nov 2022 11:44:27 -0400
+Subject: [PATCH] change cmake
 
 ---
  CMakeLists.txt | 171 +++++++++++++++++++++++++++++++------------------
  1 file changed, 108 insertions(+), 63 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6410c956..ec2877b8 100644
+index 6410c956..5ad799f3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -9,6 +9,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/)
+@@ -9,16 +9,20 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/)
  
  include(ExternalProject)
  
@@ -21,7 +21,8 @@ index 6410c956..ec2877b8 100644
  set(CMAKE_CXX_STANDARD 11)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
  set(CMAKE_CXX_EXTENSIONS OFF)
-@@ -16,9 +19,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
++set(CMAKE_INSTALL_LIBDIR "")
+ 
  set(FLARE_PYTHON_VERSION "" CACHE STRING "Python version to use for compiling modules")
  
  if(NOT CMAKE_BUILD_TYPE)
@@ -34,18 +35,17 @@ index 6410c956..ec2877b8 100644
  endif()
  
  #
-@@ -27,29 +30,43 @@ endif()
+@@ -27,29 +31,42 @@ endif()
  
  include(FetchContent)
  
 -# googletest
 -################################################################################
 +# Add conda include directories
-+if (DEFINED ENV{PREFIX})
++if (DEFINED ENV{CONDA_PREFIX})
 +    message(STATUS "Adding conda include directories.")
-+    include_directories($ENV{PREFIX}/include)
-+    include_directories($ENV{PREFIX}/include/eigen3)
-+    link_directories($ENV{PREFIX}/lib)
++    include_directories($ENV{CONDA_PREFIX}/include)
++    link_directories($ENV{CONDA_PREFIX}/lib)
 +endif()
  
 -FetchContent_Declare(googletest
@@ -80,7 +80,7 @@ index 6410c956..ec2877b8 100644
 -FetchContent_Populate(json)
 -add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR})
 -include_directories(${json_SOURCE_DIR})
-+if(EXISTS $ENV{PREFIX}/include/nlohmann)
++if(EXISTS $ENV{CONDA_PREFIX}/include/nlohmann)
 +    find_package(nlohmann_json)
 +else()
 +    message(STATUS "Download nlohmann_json.")
@@ -88,7 +88,7 @@ index 6410c956..ec2877b8 100644
 +        GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
 +        SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/External/json
 +        GIT_TAG v3.9.1)
-+
++    
 +    FetchContent_GetProperties(json)
 +    FetchContent_Populate(json)
 +    add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR})
@@ -116,7 +116,7 @@ index 6410c956..ec2877b8 100644
 -target_include_directories(Eigen3 SYSTEM INTERFACE ${SOURCE_DIR})
 -include_directories(${SOURCE_DIR})
 +set(EXIST_EIGEN OFF)
-+if(EXISTS $ENV{PREFIX}/include/eigen3)
++if(EXISTS $ENV{CONDA_PREFIX}/include/eigen3)
 +    find_package(Eigen3 3.3)
 +    message(STATUS "Found Eigen3.")
 +    set(EXIST_EIGEN ON)
@@ -164,7 +164,7 @@ index 6410c956..ec2877b8 100644
 -      TARGET_LINK_LIBRARIES(pybind11 INTERFACE "-undefined dynamic_lookup")
 -      message(STATUS "Building in conda environment on MAC")
 +set(EXIST_PYBIND OFF)
-+if(EXISTS $ENV{PREFIX}/include/pybind11)
++if(EXISTS $ENV{CONDA_PREFIX}/include/pybind11)
 +    find_package(pybind11 CONFIG)
 +    set(EXIST_PYBIND ON)
  else()
@@ -183,7 +183,7 @@ index 6410c956..ec2877b8 100644
 +    ExternalProject_Get_Property(pybind11_project SOURCE_DIR)
 +    target_include_directories(pybind11 SYSTEM INTERFACE ${SOURCE_DIR}/include)
 +    target_include_directories(pybind11 SYSTEM INTERFACE ${PYTHON_INCLUDE_DIRS})
-+
++    
 +    if(APPLE)
 +        TARGET_LINK_LIBRARIES(pybind11 INTERFACE "-undefined dynamic_lookup")
 +        message(STATUS "Building in conda environment on MAC")
