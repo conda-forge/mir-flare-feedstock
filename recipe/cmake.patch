@@ -1,14 +1,14 @@
-From 290ee7110acc4927964b9a43ce493c847866c284 Mon Sep 17 00:00:00 2001
+From 8e992812db2fa843d57ef2eddef544960b514723 Mon Sep 17 00:00:00 2001
 From: YuuuXie <xieyu.fish@gmail.com>
-Date: Tue, 1 Nov 2022 11:44:27 -0400
+Date: Tue, 1 Nov 2022 12:20:21 -0400
 Subject: [PATCH] change cmake
 
 ---
- CMakeLists.txt | 171 +++++++++++++++++++++++++++++++------------------
- 1 file changed, 108 insertions(+), 63 deletions(-)
+ CMakeLists.txt | 172 +++++++++++++++++++++++++++++++------------------
+ 1 file changed, 109 insertions(+), 63 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6410c956..5ad799f3 100644
+index 6410c956..698f2d29 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -9,16 +9,20 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/)
@@ -35,7 +35,7 @@ index 6410c956..5ad799f3 100644
  endif()
  
  #
-@@ -27,29 +31,42 @@ endif()
+@@ -27,29 +31,43 @@ endif()
  
  include(FetchContent)
  
@@ -45,6 +45,7 @@ index 6410c956..5ad799f3 100644
 +if (DEFINED ENV{PREFIX})
 +    message(STATUS "Adding conda include directories.")
 +    include_directories($ENV{PREFIX}/include)
++    include_directories($ENV{PREFIX}/include/eigen3)
 +    link_directories($ENV{PREFIX}/lib)
 +endif()
  
@@ -97,7 +98,7 @@ index 6410c956..5ad799f3 100644
  
  # Kokkos
  ################################################################################
-@@ -67,51 +84,67 @@ include_directories(${json_SOURCE_DIR})
+@@ -67,51 +85,67 @@ include_directories(${json_SOURCE_DIR})
  
  # Eigen3
  ################################################################################
@@ -200,7 +201,7 @@ index 6410c956..5ad799f3 100644
  ###############################################################################
  
  # Specify source files.
-@@ -152,7 +185,13 @@ include_directories(
+@@ -152,7 +186,13 @@ include_directories(
  # See: https://github.com/pybind/cmake_example/issues/11
  add_library(flare STATIC ${FLARE_SOURCES})
  set_target_properties(flare PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -215,7 +216,7 @@ index 6410c956..5ad799f3 100644
  
  # Link to json.
  target_link_libraries(flare PUBLIC nlohmann_json::nlohmann_json)
-@@ -198,11 +237,17 @@ endif()
+@@ -198,11 +238,17 @@ endif()
  
  # Create pybind module.
  add_library(flare_module SHARED ${PYBIND_SOURCES})
