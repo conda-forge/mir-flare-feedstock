@@ -1,17 +1,17 @@
-From ffc2e7e8519ccca4cd4cfab018bc3526682a61f6 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Jan=20Jan=C3=9Fen?= <janssen@mpie.de>
-Date: Mon, 31 Oct 2022 17:49:31 -0600
-Subject: [PATCH] cmakepatch
+From 8e992812db2fa843d57ef2eddef544960b514723 Mon Sep 17 00:00:00 2001
+From: YuuuXie <xieyu.fish@gmail.com>
+Date: Tue, 1 Nov 2022 12:20:21 -0400
+Subject: [PATCH] change cmake
 
 ---
- CMakeLists.txt | 171 +++++++++++++++++++++++++++++++------------------
- 1 file changed, 108 insertions(+), 63 deletions(-)
+ CMakeLists.txt | 172 +++++++++++++++++++++++++++++++------------------
+ 1 file changed, 109 insertions(+), 63 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6410c956..ec2877b8 100644
+index 6410c956..698f2d29 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -9,6 +9,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/)
+@@ -9,16 +9,20 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/)
  
  include(ExternalProject)
  
@@ -21,7 +21,8 @@ index 6410c956..ec2877b8 100644
  set(CMAKE_CXX_STANDARD 11)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
  set(CMAKE_CXX_EXTENSIONS OFF)
-@@ -16,9 +19,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
++set(CMAKE_INSTALL_LIBDIR "")
+ 
  set(FLARE_PYTHON_VERSION "" CACHE STRING "Python version to use for compiling modules")
  
  if(NOT CMAKE_BUILD_TYPE)
@@ -34,7 +35,7 @@ index 6410c956..ec2877b8 100644
  endif()
  
  #
-@@ -27,29 +30,43 @@ endif()
+@@ -27,29 +31,43 @@ endif()
  
  include(FetchContent)
  
@@ -88,7 +89,7 @@ index 6410c956..ec2877b8 100644
 +        GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
 +        SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/External/json
 +        GIT_TAG v3.9.1)
-+
++    
 +    FetchContent_GetProperties(json)
 +    FetchContent_Populate(json)
 +    add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR})
@@ -97,7 +98,7 @@ index 6410c956..ec2877b8 100644
  
  # Kokkos
  ################################################################################
-@@ -67,51 +84,67 @@ include_directories(${json_SOURCE_DIR})
+@@ -67,51 +85,67 @@ include_directories(${json_SOURCE_DIR})
  
  # Eigen3
  ################################################################################
@@ -183,7 +184,7 @@ index 6410c956..ec2877b8 100644
 +    ExternalProject_Get_Property(pybind11_project SOURCE_DIR)
 +    target_include_directories(pybind11 SYSTEM INTERFACE ${SOURCE_DIR}/include)
 +    target_include_directories(pybind11 SYSTEM INTERFACE ${PYTHON_INCLUDE_DIRS})
-+
++    
 +    if(APPLE)
 +        TARGET_LINK_LIBRARIES(pybind11 INTERFACE "-undefined dynamic_lookup")
 +        message(STATUS "Building in conda environment on MAC")
@@ -200,7 +201,7 @@ index 6410c956..ec2877b8 100644
  ###############################################################################
  
  # Specify source files.
-@@ -152,7 +185,13 @@ include_directories(
+@@ -152,7 +186,13 @@ include_directories(
  # See: https://github.com/pybind/cmake_example/issues/11
  add_library(flare STATIC ${FLARE_SOURCES})
  set_target_properties(flare PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -215,7 +216,7 @@ index 6410c956..ec2877b8 100644
  
  # Link to json.
  target_link_libraries(flare PUBLIC nlohmann_json::nlohmann_json)
-@@ -198,11 +237,17 @@ endif()
+@@ -198,11 +238,17 @@ endif()
  
  # Create pybind module.
  add_library(flare_module SHARED ${PYBIND_SOURCES})
