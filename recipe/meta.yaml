@@ -1,5 +1,5 @@
 {% set name = "mir-flare" %}
-{% set version = "1.3.0" %}
+{% set version = "1.3.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,8 +7,8 @@ package:
 
 source:
   url: https://github.com/mir-group/flare/archive/refs/tags/{{ version }}.tar.gz
-  sha256: a96eaa9acc3ce1df8fb17a23016eb4690de81b9754c572107fa8166a72dc699b
-  patches: 
+  sha256: 5462ece2937007d4643f30969c00ed818fb7364e953ec03db846a73cee120f32
+  patches:
     - requirements.patch
     - cmake.patch
 
