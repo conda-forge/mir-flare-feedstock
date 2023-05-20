@@ -1,14 +1,14 @@
-From 9236901916f6a355abadf857ddfa31b9b7ac77c1 Mon Sep 17 00:00:00 2001
+From 742f3aec2897d0284053894308b806115ca823dd Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Sat, 20 May 2023 14:17:34 -0600
+Date: Sat, 20 May 2023 14:30:12 -0600
 Subject: [PATCH] Update CMakeLists.txt
 
 ---
- CMakeLists.txt | 153 +++++++++++++++++++++++++++++++++----------------
- 1 file changed, 103 insertions(+), 50 deletions(-)
+ CMakeLists.txt | 158 ++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 103 insertions(+), 55 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 61fb33db..231e685e 100644
+index 61fb33db..2f7afd92 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -9,6 +9,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/)
@@ -83,7 +83,7 @@ index 61fb33db..231e685e 100644
  
  # Kokkos
  ################################################################################
-@@ -68,31 +87,31 @@ include_directories(${json_SOURCE_DIR})
+@@ -68,50 +87,67 @@ include_directories(${json_SOURCE_DIR})
  # Eigen3
  ################################################################################
  
@@ -137,10 +137,13 @@ index 61fb33db..231e685e 100644
  if (NOT FLARE_PYTHON_VERSION)
      set(Python_ADDITIONAL_VERSIONS 3.8 3.7 3.6 3.5)
  endif()
-@@ -103,15 +122,37 @@ ExternalProject_Get_Property(pybind11_project SOURCE_DIR)
- target_include_directories(pybind11 SYSTEM INTERFACE ${SOURCE_DIR}/include)
- target_include_directories(pybind11 SYSTEM INTERFACE ${PYTHON_INCLUDE_DIRS})
+ find_package(PythonLibsNew ${FLARE_PYTHON_VERSION} REQUIRED)
  
+-add_library(pybind11 INTERFACE)
+-ExternalProject_Get_Property(pybind11_project SOURCE_DIR)
+-target_include_directories(pybind11 SYSTEM INTERFACE ${SOURCE_DIR}/include)
+-target_include_directories(pybind11 SYSTEM INTERFACE ${PYTHON_INCLUDE_DIRS})
+-
 -if(APPLE)
 -      TARGET_LINK_LIBRARIES(pybind11 INTERFACE "-undefined dynamic_lookup")
 -      message(STATUS "Building in conda environment on MAC")
@@ -181,7 +184,7 @@ index 61fb33db..231e685e 100644
  ###############################################################################
  
  # Specify source files.
-@@ -153,7 +194,13 @@ include_directories(
+@@ -153,7 +189,13 @@ include_directories(
  # See: https://github.com/pybind/cmake_example/issues/11
  add_library(flare STATIC ${FLARE_SOURCES})
  set_target_properties(flare PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -196,7 +199,7 @@ index 61fb33db..231e685e 100644
  
  # Link to json.
  target_link_libraries(flare PUBLIC nlohmann_json::nlohmann_json)
-@@ -205,11 +252,17 @@ endif()
+@@ -205,11 +247,17 @@ endif()
  
  # Create pybind module.
  add_library(flare_module SHARED ${PYBIND_SOURCES})
