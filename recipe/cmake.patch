@@ -1,14 +1,14 @@
-From ffc2e7e8519ccca4cd4cfab018bc3526682a61f6 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Jan=20Jan=C3=9Fen?= <janssen@mpie.de>
-Date: Mon, 31 Oct 2022 17:49:31 -0600
-Subject: [PATCH] cmakepatch
+From 742f3aec2897d0284053894308b806115ca823dd Mon Sep 17 00:00:00 2001
+From: Jan Janssen <jan-janssen@users.noreply.github.com>
+Date: Sat, 20 May 2023 14:30:12 -0600
+Subject: [PATCH] Update CMakeLists.txt
 
 ---
- CMakeLists.txt | 171 +++++++++++++++++++++++++++++++------------------
- 1 file changed, 108 insertions(+), 63 deletions(-)
+ CMakeLists.txt | 158 ++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 103 insertions(+), 55 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6410c956..ec2877b8 100644
+index 61fb33db..2f7afd92 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -9,6 +9,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/)
@@ -21,25 +21,10 @@ index 6410c956..ec2877b8 100644
  set(CMAKE_CXX_STANDARD 11)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
  set(CMAKE_CXX_EXTENSIONS OFF)
-@@ -16,9 +19,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
- set(FLARE_PYTHON_VERSION "" CACHE STRING "Python version to use for compiling modules")
- 
- if(NOT CMAKE_BUILD_TYPE)
--  message(STATUS "[flare] CMAKE_BUILD_TYPE not specified, setting it to "
--                 "Release. Use `-DCMAKE_BUILD_TYPE=...` to overwrite.")
--  set(CMAKE_BUILD_TYPE Release)
-+    message(STATUS "[flare] CMAKE_BUILD_TYPE not specified, setting it to "
-+                   "Release. Use `-DCMAKE_BUILD_TYPE=...` to overwrite.")
-+    set(CMAKE_BUILD_TYPE Release)
- endif()
- 
- #
-@@ -27,29 +30,43 @@ endif()
+@@ -27,29 +30,45 @@ endif()
  
  include(FetchContent)
  
--# googletest
--################################################################################
 +# Add conda include directories
 +if (DEFINED ENV{PREFIX})
 +    message(STATUS "Adding conda include directories.")
@@ -47,6 +32,9 @@ index 6410c956..ec2877b8 100644
 +    include_directories($ENV{PREFIX}/include/eigen3)
 +    link_directories($ENV{PREFIX}/lib)
 +endif()
++
+ # googletest
+ ################################################################################
  
 -FetchContent_Declare(googletest
 -    GIT_REPOSITORY https://github.com/google/googletest.git
@@ -55,8 +43,6 @@ index 6410c956..ec2877b8 100644
 -    UPDATE_COMMAND ""
 -)
 -FetchContent_MakeAvailable(googletest)
-+# googletest: only used in test mode
-+################################################################################
 +if(BUILD_TESTING)
 +    message(STATUS "Download gtest.")
 +    FetchContent_Declare(googletest
@@ -70,7 +56,7 @@ index 6410c956..ec2877b8 100644
  
  # Json
  ################################################################################
--
+ 
 -FetchContent_Declare(json
 -    GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
 -    SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/External/json
@@ -97,11 +83,10 @@ index 6410c956..ec2877b8 100644
  
  # Kokkos
  ################################################################################
-@@ -67,51 +84,67 @@ include_directories(${json_SOURCE_DIR})
- 
+@@ -68,50 +87,67 @@ include_directories(${json_SOURCE_DIR})
  # Eigen3
  ################################################################################
--
+ 
 -ExternalProject_Add(
 -    eigen_project
 -    SOURCE_DIR "${CMAKE_BINARY_DIR}/External/Eigen3"
@@ -150,8 +135,7 @@ index 6410c956..ec2877b8 100644
 -    INSTALL_COMMAND ""
 -)
  if (NOT FLARE_PYTHON_VERSION)
--    set(Python_ADDITIONAL_VERSIONS 3.7 3.6 3.5)
-+    set(Python_ADDITIONAL_VERSIONS 3.8 3.7 3.6 3.5)
+     set(Python_ADDITIONAL_VERSIONS 3.8 3.7 3.6 3.5)
  endif()
  find_package(PythonLibsNew ${FLARE_PYTHON_VERSION} REQUIRED)
  
@@ -200,7 +184,7 @@ index 6410c956..ec2877b8 100644
  ###############################################################################
  
  # Specify source files.
-@@ -152,7 +185,13 @@ include_directories(
+@@ -153,7 +189,13 @@ include_directories(
  # See: https://github.com/pybind/cmake_example/issues/11
  add_library(flare STATIC ${FLARE_SOURCES})
  set_target_properties(flare PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -215,7 +199,7 @@ index 6410c956..ec2877b8 100644
  
  # Link to json.
  target_link_libraries(flare PUBLIC nlohmann_json::nlohmann_json)
-@@ -198,11 +237,17 @@ endif()
+@@ -205,11 +247,17 @@ endif()
  
  # Create pybind module.
  add_library(flare_module SHARED ${PYBIND_SOURCES})
