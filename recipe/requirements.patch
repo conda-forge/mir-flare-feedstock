@@ -1,6 +1,6 @@
-From 4d08d7412ecabc0bb91a4681c4df78be6967f6a7 Mon Sep 17 00:00:00 2001
+From 8fce79cf5cc6afdb0fccd870dae044dbfeaf08d3 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Sun, 30 Oct 2022 12:56:25 -0600
+Date: Sat, 20 May 2023 14:19:34 -0600
 Subject: [PATCH] Update requirements.txt
 
 ---
@@ -8,11 +8,11 @@ Subject: [PATCH] Update requirements.txt
  1 file changed, 15 deletions(-)
 
 diff --git a/requirements.txt b/requirements.txt
-index f2c1fd1e..31bcc5e9 100644
+index 4f6cf623..051c9493 100644
 --- a/requirements.txt
 +++ b/requirements.txt
 @@ -1,20 +1,5 @@
- numpy >=1.18, <=1.20.3
+ numpy >=1.18, <1.23
  scipy
 -memory_profiler
  numba
