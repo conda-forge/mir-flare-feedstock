@@ -29,6 +29,7 @@ requirements:
     - python
     - eigen
     - libblas
+    - libcblas
     - liblapack
     - liblapacke
     - pybind11
