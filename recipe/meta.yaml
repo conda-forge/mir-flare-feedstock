@@ -28,6 +28,7 @@ requirements:
     - eigen
     - libblas
     - liblapack
+    - liblapacke
     - pybind11
     - nlohmann_json
     - wandb
