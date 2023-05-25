@@ -32,6 +32,7 @@ requirements:
     - libcblas
     - liblapack
     - liblapacke
+    - mkl
     - pybind11
     - nlohmann_json
     - wandb
