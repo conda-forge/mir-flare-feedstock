@@ -13,7 +13,7 @@ source:
     - cmake.patch
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py>39]
   skip: true  # [win]
@@ -46,6 +46,7 @@ requirements:
 test:
   imports:
     - flare
+    - flare.bffs.sgp._C_flare
   commands:
     - pip check
   requires:
