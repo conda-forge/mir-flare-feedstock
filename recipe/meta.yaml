@@ -22,19 +22,15 @@ requirements:
     - make
     - cmake
     - {{ compiler('cxx') }}
-    - llvm-openmp  # [osx]
-    - libgomp      # [linux]
   host:
     - pip
     - python
     - eigen
-    - libblas
-    - libcblas
-    - liblapack
     - liblapacke
     - pybind11
     - nlohmann_json
     - wandb
+    - {{ blas_impl }}
   run:
     - ase
     - ipython
@@ -45,9 +41,8 @@ requirements:
     - numpy <=1.20.3
     - python
     - scipy
-    - nlohmann_json
-    - eigen
-    - wandb
+    - libblas * *{{ blas_impl }}
+    - {{ blas_impl }}
 
 test:
   imports:
