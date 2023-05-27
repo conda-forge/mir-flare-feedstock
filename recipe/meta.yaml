@@ -30,7 +30,8 @@ requirements:
     - pybind11
     - nlohmann_json
     - wandb
-    - {{ blas_impl }}
+    - {{ blas_impl }} 
+    - mkl-include  # [blas_impl == 'mkl']
   run:
     - ase
     - ipython
@@ -43,6 +44,7 @@ requirements:
     - scipy
     - libblas * *{{ blas_impl }}
     - {{ blas_impl }}
+    - mkl-include  # [blas_impl == 'mkl']
 
 test:
   imports:
